@@ -20,7 +20,7 @@ export class App extends Component {
     error: false,
   }
 
-  async componentDidUpdate (_, prevState) {
+  componentDidUpdate (_, prevState) {
     const prevQuery = prevState.searchQuery;
     const nextQuery = this.state.searchQuery;
     const prevPage = prevState.page;
