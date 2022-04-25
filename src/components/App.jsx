@@ -59,6 +59,7 @@ export class App extends Component {
     const { searchQuery, images, isLoader, totalImg, showModal, modalImg} = this.state;
     const showMoreButton = totalImg > images.length;
     const errorRequest = totalImg === 0;
+    
     return(
       <>
         <Searchbar onSubmit={this.handlSubmit} />
