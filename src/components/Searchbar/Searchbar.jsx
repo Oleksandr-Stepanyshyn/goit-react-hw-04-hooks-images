@@ -1,34 +1,39 @@
 import PropTypes from 'prop-types';
-import { Component } from "react"
-import { Header, ButtonIcon, Input, SearchButton, SearchForm } from "./Searchbar.styled"
-
+import { Component } from 'react';
+import {
+  Header,
+  ButtonIcon,
+  Input,
+  SearchButton,
+  SearchForm,
+} from './Searchbar.styled';
 
 export class Searchbar extends Component {
   state = {
     searchQuery: '',
-  }
+  };
 
-  handleQueryChange = (e) => {
-    this.setState({searchQuery: e.currentTarget.value})
-  }
+  handleQueryChange = e => {
+    this.setState({ searchQuery: e.currentTarget.value });
+  };
 
-  handlSubmit = (e) => {
+  handlSubmit = e => {
     e.preventDefault();
-    if(this.state.searchQuery.trim() === '') {
-      return alert('Insert correct request')
+    if (this.state.searchQuery.trim() === '') {
+      return alert('Insert correct request');
     }
-    const {searchQuery} = this.state;
+    const { searchQuery } = this.state;
     this.props.onSubmit(searchQuery);
-    this.setState({searchQuery: ''})
-  }
+    this.setState({ searchQuery: '' });
+  };
 
   render() {
-    const {searchQuery} = this.state;
-    return(
+    const { searchQuery } = this.state;
+    return (
       <Header>
         <SearchForm onSubmit={this.handlSubmit}>
           <SearchButton>
-            <ButtonIcon/>
+            <ButtonIcon />
           </SearchButton>
           <Input
             type="text"
@@ -41,10 +46,10 @@ export class Searchbar extends Component {
           />
         </SearchForm>
       </Header>
-    )
+    );
   }
 }
 
 Searchbar.propTypes = {
   onSubmit: PropTypes.func.isRequired,
-}
+};
