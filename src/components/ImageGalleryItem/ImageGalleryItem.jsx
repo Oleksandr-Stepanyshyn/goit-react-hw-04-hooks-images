@@ -1,11 +1,17 @@
 import PropTypes from 'prop-types';
 import { GalleryItem, Image } from './ImageGalleryItem.styled';
+import { Modal } from 'components/Modal/Modal';
+import { useState } from 'react';
 
 export const ImageGalleryItem = ({
   img: { webformatURL, tags, largeImageURL },
-  toggleModal,
-  setModalImg,
 }) => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const toggleModal = () => {
+    setIsModalOpen(p => !p);
+  };
+
   return (
     <GalleryItem>
       <Image
@@ -13,15 +19,17 @@ export const ImageGalleryItem = ({
         alt={tags}
         onClick={() => {
           toggleModal();
-          setModalImg(largeImageURL);
         }}
       />
+      {isModalOpen && (
+        <Modal onClose={toggleModal}>
+          <img src={largeImageURL} alt="#" />
+        </Modal>
+      )}
     </GalleryItem>
   );
 };
 
 ImageGalleryItem.propTypes = {
   img: PropTypes.object.isRequired,
-  toggleModal: PropTypes.func.isRequired,
-  setModalImg: PropTypes.func.isRequired,
 };

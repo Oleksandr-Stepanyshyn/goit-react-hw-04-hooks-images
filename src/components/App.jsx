@@ -6,7 +6,6 @@ import { Button } from './Button/Button';
 import { ImageGallery } from './ImageGallery/ImageGallery';
 import { ImageGalleryItem } from './ImageGalleryItem/ImageGalleryItem';
 import { Loader } from './Loader/Loader';
-import { Modal } from './Modal/Modal';
 import { Searchbar } from './Searchbar/Searchbar';
 import { ErrorText } from './App.styled';
 
@@ -16,8 +15,6 @@ export const App = () => {
   const [totalImg, setTotalImg] = useState('');
   const [page, setPage] = useState(null);
   const [isLoader, setIsLoader] = useState(false);
-  const [showModal, setShowModal] = useState(false);
-  const [modalImg, setModalImg] = useState(null);
 
   useEffect(() => {
     if (!searchQuery) {
@@ -47,10 +44,6 @@ export const App = () => {
     setPage(p => p + 1);
   };
 
-  const toggleModal = () => {
-    setShowModal(p => !p);
-  };
-
   const showMoreButton = totalImg > images.length;
   const errorRequest = totalImg === 0;
 
@@ -60,22 +53,12 @@ export const App = () => {
       {images.length > 0 && (
         <ImageGallery>
           {images.map(image => (
-            <ImageGalleryItem
-              key={image.id}
-              img={image}
-              setModalImg={setModalImg}
-              toggleModal={toggleModal}
-            />
+            <ImageGalleryItem key={image.id} img={image} />
           ))}
         </ImageGallery>
       )}
       {isLoader && <Loader />}
       {showMoreButton && <Button incrementPage={incrementPage} />}
-      {showModal && (
-        <Modal onClose={toggleModal}>
-          <img src={modalImg} alt="#" />
-        </Modal>
-      )}
       {errorRequest && (
         <ErrorText>No results found for "{searchQuery}" :(</ErrorText>
       )}
