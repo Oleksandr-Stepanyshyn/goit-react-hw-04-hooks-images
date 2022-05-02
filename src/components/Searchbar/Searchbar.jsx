@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types';
+import { toast } from 'react-toastify';
 import { useState } from 'react';
 import {
   Header,
@@ -60,7 +61,7 @@ export const Searchbar = ({ onSubmit }) => {
   const handlSubmit = e => {
     e.preventDefault();
     if (searchQuery.trim() === '') {
-      return alert('Insert correct request');
+      return toast.warn('Insert correct request');
     }
     onSubmit(searchQuery);
     setSearchQuery('');
